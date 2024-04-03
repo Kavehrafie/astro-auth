@@ -1,0 +1,26 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+const session = await Astro.locals.auth.validate();
+if (!session) return Astro.redirect("/login", 302);
+
+// example of using Prisma to fetch user data
+// import sql from "../../lib/prisma";
+
+// const user = await sql.user.findUnique({
+//   where: { id: session.user.userId },
+// });
+
+// console.log(user);
+---
+
+<BaseLayout title="Profile" />
+
+<div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+  <div class="flex flex-col space-y-2 text-center">
+    <h1 class="text-2xl font-semibold tracking-tight">Profile</h1>
+  </div>
+
+  <p>User id: {session.user.userId}</p>
+
+  <p>Username: {session.user.username}</p>
+</div>
